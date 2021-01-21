@@ -4,11 +4,10 @@
 
 import random
 import requests
-import re
 from dynaconf import settings
+from google_search.utils.logger import logger
 
-
-def google_sbi(image_url: str) -> str:
+def google_sbi_via_url(image_url: str) -> bool:
     user_agent = random.choice(settings.USER_AGENT)
     url = f'{settings.BASE_URL}searchbyimage?image_url={image_url}&btnG=Search+by+image&encoded_image=&image_content=&filename=&hl=en'
     headers = {
@@ -19,12 +18,14 @@ def google_sbi(image_url: str) -> str:
         # 'referer': settings.BASE_URL,
         # 'sec-fetch-mode': 'navigate'
     }
-    response = requests.get(url=url, headers=headers, verify=False)
+    response = requests.get(url=url, headers=headers, verify=False,allow_redirects=False)
     if response.status_code == 302:
         fetch_url = response.headers.get('Location')
-        return fetch_url
+        logger.info(fetch_url)
+        return True
+    return False
 
 
 if __name__ == '__main__':
-    google_sbi(
+    google_sbi_via_url(
         'https://ae01.alicdn.com/kf/H906419260898432088dfe4aeeb832491o/Mini-IP-Camera-1080P-Sensor-Night-Vision-Camcorder-Motion-DVR-Micro-Camera-Sport-DV-Video-small.jpg')

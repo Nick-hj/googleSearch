@@ -10,7 +10,7 @@ class GoogleParser(object):
         self.url = url
 
     def parse_actions(self, action_value: str) -> int:
-
+        pass
 
     def loads(self) -> List[Dict[str, Any]]:
         result = []
