@@ -2,12 +2,12 @@ import redis
 from pathlib import Path
 from typing import Optional
 from dynaconf import loaders, settings
-from google_search.utils.logger import logger
+from googleSearch.utils.logger import logger
 
 DEFAULT_PATH = "settings.toml"
 BASE_SETTINGS = {
     "IS_DEVE": True,
-    "BASE_URL": "https://www.google.com/",
+    "BASE_URL": "https://www.google.com",
     "HOME_DIR": str(Path().absolute()),
     "REDIS": {
         "HOST": 'localhost',
@@ -25,15 +25,25 @@ BASE_SETTINGS = {
     "PUSH_URL_WITH_SBI_REDIS_KEY": 'PUSH_URL_WITH_SBI_REDIS_KEY',  # redis 获取带有sbi的url存入redis
     "USER_AGENT": [
         "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.183 Safari/537.36"
-    ]
+    ],
+    'EMAIL_EXISTS': ['admin@', 'sales@', 'team@', 'support@', 'customercare@', 'info@', 'customer@', 'service@',
+                     'contact@', 'hello@'],
+    'EXCLUDE_KEY_WORD': ['walmart.', 'sendo.', 'aliexpress.', 'wish.', 'amazon.', 'lazada.', 'ebay.', 'google.',
+                         'shopee',
+                         'tokopedia.', 'zipy.', 'tiki.', 'imall.', 'amazon.co.', 'joom.', 'dhgate.', 'taobao.',
+                         'tmall.',
+                         'jd.', 'suning.', 'zipy.', '1688.', 'pinterest', 'facebook.', 'youtube.', 'adobe.com', 'etsy.',
+                         'alibaba.', 'vimeo.', 'tistory.', 'heavy.', 'line.', 'buzzfeed.', 'kijiji.', 'gearbest.',
+                         'bonanza.', 'staples.', 'jimmyjazz.', 'sunsky-online.', 'pcwonderland.', 'pnghut.',
+                         'aliradar.', 'pricecheck.', 'allmacworld.', 'wanelo.', 'findniche.', 'ecomhunt.', 'amz520.',
+                         'jiwaji.'],
+    'TOTAL_PAGE': 10
 
 }
 
 
 def load_or_create_settings(path: Optional[str]):
     path = path or DEFAULT_PATH
-    print(Path(path).exists())
-    print(path)
     if not Path(path).exists():
         default_settings_path = str(Path.cwd() / Path(DEFAULT_PATH))
         logger.info(

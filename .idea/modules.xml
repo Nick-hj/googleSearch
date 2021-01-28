@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/search_by_image.iml" filepath="$PROJECT_DIR$/.idea/search_by_image.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/googleSearch.iml" filepath="$PROJECT_DIR$/.idea/googleSearch.iml" />
     </modules>
   </component>
 </project>
